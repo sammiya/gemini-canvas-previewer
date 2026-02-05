@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Canvas Previewer",
+  "version": "0.1.0",
+  "description": "Adds a preview tab to Google Gemini's Canvas when the native preview is missing",
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["shim.html", "shim.js"],
+      "matches": ["https://gemini.google.com/*"]
+    }
+  ],
+  "sandbox": {
+    "pages": ["shim.html"]
+  },
+  "content_security_policy": {
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals allow-downloads; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+  }
+}
